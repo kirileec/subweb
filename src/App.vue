@@ -400,7 +400,17 @@ const options = ref({
     ssr: 'ssr'
   },
   backendOptions: [{ value: defaultBackend }, { value: 'https://api.flowercloud.yt/sub?' }],
-  remoteConfig: []
+  remoteConfig: [
+    {
+      label: '',
+      options: [
+        {
+          label: '',
+          value: ''
+        }
+      ]
+    }
+  ]
 })
 
 const form = ref({
