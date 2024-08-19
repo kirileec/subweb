@@ -241,14 +241,14 @@
                   :disabled="form.sourceSubUrl.length === 0"
                   >生成订阅链接</el-button
                 >
-                <el-button
+                <!-- <el-button
                   style="width: 140px"
                   type="danger"
                   @click="makeShortUrl"
                   :loading="loading"
                   :disabled="customSubUrl.length === 0"
                   >生成短链接</el-button
-                >
+                > -->
                 <el-button
                   style="width: 140px"
                   type="primary"
