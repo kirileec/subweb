@@ -3,7 +3,7 @@
     WORKDIR /app
     COPY . .
     RUN npm install
-    RUN npm build
+    RUN npm run build
     
     FROM nginx:mainline-alpine
     COPY --from=build /app/dist /usr/share/nginx/html
