@@ -1,0 +1,7 @@
+services:
+  subweb:
+    image: slk1133/subweb:latest
+    container_name: subweb
+    restart: always
+    ports:
+      - 38380:80
