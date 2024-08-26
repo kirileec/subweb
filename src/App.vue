@@ -377,6 +377,7 @@ const tgBotLink = import.meta.env.SUB_BOT_LINK
 const useStorage = import.meta.env.SUB_USE_STORAGE === 'true'
 const ifLoadRemote = import.meta.env.SUB_LOAD_REMOTE === 'true'
 const remoteJson = import.meta.env.SUB_REMOTE_JSON
+const remoteBackendJson = import.meta.env.SUB_REMOTE_BACKENDJSON
 
 const backendVersion = ref('')
 const advanced = ref('2')
@@ -496,6 +497,10 @@ onMounted(() => {
 
 function loadRemoteConfigs() {
   if (ifLoadRemote) {
+    fetch(remoteBackendJson).then(async (res)=>{
+      let data = await res.json()
+      options.value.backendOptions = data
+    })
     fetch(remoteJson).then(async (res) => {
       let data = await res.json()
       options.value.remoteConfig = data

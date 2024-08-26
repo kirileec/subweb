@@ -13,6 +13,7 @@ interface ImportMetaEnv {
   readonly SUB_CACHE_TTL: string
   readonly SUB_LOAD_REMOTE: string
   readonly SUB_REMOTE_JSON: string
+  readonly SUB_REMOTE_BACKENDJSON: string
 
   // more env variables...
 }
