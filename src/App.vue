@@ -217,6 +217,20 @@
                     <el-button @click="copy(customSubUrl)" ref="copy-btn" :icon="CopyDocument">{{
                       copied ? '已复制' : '复制'
                     }}</el-button>
+                    <el-popover
+                      placement="top"
+                      :title="form.clientType"
+                      :width="400"
+                      trigger="hover"
+                    >
+                      <vue-qrcode
+                        :value="customSubUrl ? customSubUrl : 'https://sub.linx.run'"
+                        :options="{ width: 360 }"
+                      ></vue-qrcode>
+                      <template #reference>
+                        <el-button :icon="Promotion">二维码</el-button>
+                      </template>
+                    </el-popover>
                   </template>
                 </el-input>
               </el-form-item>
@@ -472,6 +486,7 @@ import {
   Link,
   MagicStick,
   Plus,
+  Promotion,
   QuestionFilled,
   Upload
 } from '@element-plus/icons-vue'
@@ -497,7 +512,7 @@ onMounted(() => {
 
 function loadRemoteConfigs() {
   if (ifLoadRemote) {
-    fetch(remoteBackendJson).then(async (res)=>{
+    fetch(remoteBackendJson).then(async (res) => {
       let data = await res.json()
       options.value.backendOptions = data
     })

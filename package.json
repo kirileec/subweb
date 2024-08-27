@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@chenfengyuan/vue-qrcode": "^2.0.0",
     "@element-plus/icons-vue": "^2.3.1",
     "@vueuse/core": "^11.0.0",
     "element-plus": "^2.8.0",
