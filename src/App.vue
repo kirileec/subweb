@@ -57,16 +57,20 @@
 
               <div v-if="advanced === '2'">
                 <el-form-item label="后端地址:">
-                  <el-autocomplete
-                    style="width: 100%"
+                  <el-select
                     v-model="form.customBackend"
-                    :fetch-suggestions="backendSearch"
-                    placeholder="自建后端。例：http://127.0.0.1:25500/sub?"
+                    allow-create
+                    filterable
+                    placeholder="请选择"
+                    style="width: 100%"
                   >
-                    <template v-slot:append>
-                      <el-button @click="gotoGayhub" :icon="Link">前往项目仓库</el-button>
-                    </template>
-                  </el-autocomplete>
+                    <el-option
+                      v-for="item in options.backendOptions"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    ></el-option>
+                  </el-select>
                 </el-form-item>
                 <el-form-item label="远程配置:">
                   <el-select
@@ -398,23 +402,27 @@ const advanced = ref('2')
 const isPC = ref(true)
 const options = ref({
   clientTypes: {
-    singbox: 'singbox',
+    SingBox: 'singbox',
     Clash: 'clash',
     ClashR: 'clashr',
-    Surge: 'surge&ver=4',
+    'Surge4/5': 'surge&ver=4',
     Surge3: 'surge&ver=3',
     QuantumultX: 'quanx',
     Surfboard: 'surfboard',
     V2Ray: 'v2ray',
     Trojan: 'trojan',
     Mellow: 'mellow',
+    '混合订阅（mixed）': 'mixed',
     Loon: 'loon',
-    ss: 'ss',
-    ssd: 'ssd',
-    sssub: 'sssub',
-    ssr: 'ssr'
+    'Shadowsocks(SIP002)': 'ss',
+    ShadowsocksD: 'ssd',
+    'Shadowsocks Android(SIP008)': 'sssub',
+    ShadowsocksR: 'ssr',
+    自动判断客户端: 'auto'
   },
-  backendOptions: [{ value: defaultBackend }, { value: 'https://api.flowercloud.yt/sub?' }],
+  backendOptions: [
+    { label: '自建修改后端(从ws path 去除singbox的early_data参数)', value: defaultBackend }
+  ],
   remoteConfig: [
     {
       label: '',
@@ -445,7 +453,7 @@ const form = ref({
   scv: true,
   fdn: false,
   expand: true,
-  appendType: true,
+  appendType: false,
   insert: false, // 是否插入默认订阅的节点，对应配置项 insert_url
   new_name: true, // 是否使用 Clash 新字段
 
@@ -515,6 +523,7 @@ function loadRemoteConfigs() {
     fetch(remoteBackendJson).then(async (res) => {
       let data = await res.json()
       options.value.backendOptions = data
+      form.value.customBackend = data[0].value
     })
     fetch(remoteJson).then(async (res) => {
       let data = await res.json()
@@ -529,9 +538,7 @@ function onCopy() {
 function goToProject() {
   window.open(project)
 }
-function gotoGayhub() {
-  window.open(gayhubRelease)
-}
+
 function gotoRemoteConfig() {
   window.open(remoteConfigSample)
 }
@@ -786,7 +793,7 @@ confirmLoadConfig() {
       const url = new URL(await analyzeUrl())
 
       // Set the custom backend URL
-      form.value.customBackend = url.origin + url.pathname + '?'
+      //form.value.customBackend = url.origin + url.pathname + '?'
 
       // Parse the URL parameters
       const params = new URLSearchParams(url.search)
