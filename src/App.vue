@@ -518,11 +518,11 @@ onMounted(() => {
 
 function loadRemoteConfigs() {
   if (ifLoadRemote) {
-    // fetch(remoteBackendJson).then(async (res) => {
-    //   let data = await res.json()
-    //   options.value.backendOptions = data
-    //   form.value.customBackend = data[0].value
-    // })
+    fetch(remoteBackendJson).then(async (res) => {
+      let data = await res.json()
+      options.value.backendOptions = data
+      form.value.customBackend = data[0].value
+    })
     fetch(remoteJson).then(async (res) => {
       let data = await res.json()
       options.value.remoteConfig = data
