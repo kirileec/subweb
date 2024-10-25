@@ -438,7 +438,7 @@ const form = ref({
   sourceSubUrl: '',
   clientType: '',
   customBackend: '',
-  remoteConfig: 'Acl4SSR',
+  remoteConfig: 'ACL4SSR_Online_Full_Dream',
   excludeRemarks: '',
   includeRemarks: '',
   filename: '',
