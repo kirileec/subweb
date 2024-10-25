@@ -420,9 +420,7 @@ const options = ref({
     ShadowsocksR: 'ssr',
     自动判断客户端: 'auto'
   },
-  backendOptions: [
-    { label: '自建修改后端(从ws path 去除singbox的early_data参数)', value: defaultBackend }
-  ],
+  backendOptions: [{ label: 'linx', value: 'https://sub.linx.run/sub?' }],
   remoteConfig: [
     {
       label: '',
@@ -520,11 +518,11 @@ onMounted(() => {
 
 function loadRemoteConfigs() {
   if (ifLoadRemote) {
-    fetch(remoteBackendJson).then(async (res) => {
-      let data = await res.json()
-      options.value.backendOptions = data
-      form.value.customBackend = data[0].value
-    })
+    // fetch(remoteBackendJson).then(async (res) => {
+    //   let data = await res.json()
+    //   options.value.backendOptions = data
+    //   form.value.customBackend = data[0].value
+    // })
     fetch(remoteJson).then(async (res) => {
       let data = await res.json()
       options.value.remoteConfig = data
