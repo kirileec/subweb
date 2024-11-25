@@ -526,6 +526,7 @@ function loadRemoteConfigs() {
     fetch(remoteJson).then(async (res) => {
       let data = await res.json()
       options.value.remoteConfig = data
+      form.value.remoteConfig = data[0].options[0].label
     })
   }
 }
